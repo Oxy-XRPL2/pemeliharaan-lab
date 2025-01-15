@@ -1,0 +1,98 @@
+/* Global Style */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f7f7f7;
+}
+
+/* Flexbox container */
+.container {
+    display: flex;
+    flex-direction: row;
+}
+
+/* Styling Konten Utama */
+.main-content {
+    flex-grow: 1;
+    margin-left: 240px; /* Menyesuaikan margin dengan lebar sidebar */
+    padding: 40px;
+    background-color: white;
+}
+
+form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px #00000033;
+}
+
+/* Styling untuk label dan input field */
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.input-field {
+    margin-bottom: 20px;
+}
+
+.input-field input, 
+.input-field select, 
+.input-field textarea {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.input-field textarea {
+    resize: vertical; /* Memungkinkan textarea untuk di-resize secara vertikal */
+}
+
+.checklist {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.checklist label {
+    margin-right: 15px;
+    font-weight: normal;
+}
+
+.checklist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.checklist-grid label {
+    display: flex;
+    align-items: center;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.checklist-grid input {
+    margin-right: 10px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #218838;
+}

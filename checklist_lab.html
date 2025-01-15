@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checklist Lab</title>
+    <link rel="stylesheet" href="./assets/css/cl_style.css">
+    <link rel="stylesheet" href="./assets/css/sidebar.css">
+    
+    <!-- Tambahkan SweetAlert dan jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <!-- Flexbox Container -->
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2>Beranda</h2>
+            <ul>
+                <li><a href="index.html">Beranda</a></li>
+                <li class="active"><a href="checklist_lab.html">Checklist Lab</a></li>
+                <li><a href="checklist_pc.html">Checklist PC</a></li>
+                <li><a href="report.html">Laporan</a></li>
+            </ul>
+        </div>
+
+        <!-- Konten Utama -->
+        <div class="main-content">
+            <h1>Checklist Laboratorium Komputer</h1>
+
+            <!-- Form Identitas Lab -->
+            <form id="checklist-form" method="post">
+                <table class="info-lab">
+                    <tr>
+                        <td>LAB</td>
+                        <td>:</td>
+                        <td><input type="text" name="lab" required></td>
+                    </tr>
+                    <tr>
+                        <td>NAMA PETUGAS 1</td>
+                        <td>:</td>
+                        <td><input type="text" name="petugas1" required></td>
+                    </tr>
+                    <tr>
+                        <td>NAMA PETUGAS 2</td>
+                        <td>:</td>
+                        <td><input type="text" name="petugas2" required></td>
+                    </tr>
+                    <tr>
+                        <td>NAMA PETUGAS 3</td>
+                        <td>:</td>
+                        <td><input type="text" name="petugas3" required></td>
+                    </tr>
+                    <tr>
+                        <td>TANGGAL PENGECEKAN</td>
+                        <td>:</td>
+                        <td><input type="date" name="tanggal" required></td>
+                    </tr>
+                </table>
+
+                <!-- Tabel Checklist -->
+                <table class="checklist">
+                    <thead>
+                        <tr>
+                            <th rowspan="2">NO</th>
+                            <th rowspan="2">URAIAN</th>
+                            <th colspan="3">JUMLAH</th>
+                            <th rowspan="2">KETERANGAN</th>
+                        </tr>
+                        <tr>
+                            <th>BAIK</th>
+                            <th>RUSAK</th>
+                            <th>TOTAL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>KOMPUTER SET</td>
+                            <td><input type="number" name="komputer_baik" min="0" required></td>
+                            <td><input type="number" name="komputer_rusak" min="0" required></td>
+                            <td><input type="number" name="komputer_total" min="0" required></td>
+                            <td><input type="text" name="komputer_keterangan"></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>MONITOR</td>
+                            <td><input type="number" name="monitor_baik" min="0" required></td>
+                            <td><input type="number" name="monitor_rusak" min="0" required></td>
+                            <td><input type="number" name="monitor_total" min="0" required></td>
+                            <td><input type="text" name="monitor_keterangan"></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>CPU</td>
+                            <td><input type="number" name="cpu_baik" min="0" required></td>
+                            <td><input type="number" name="cpu_rusak" min="0" required></td>
+                            <td><input type="number" name="cpu_total" min="0" required></td>
+                            <td><input type="text" name="cpu_keterangan"></td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>KEYBOARD</td>
+                            <td><input type="number" name="keyboard_baik" min="0" required></td>
+                            <td><input type="number" name="keyboard_rusak" min="0" required></td>
+                            <td><input type="number" name="keyboard_total" min="0" required></td>
+                            <td><input type="text" name="keyboard_keterangan"></td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>MOUSE</td>
+                            <td><input type="number" name="mouse_baik" min="0" required></td>
+                            <td><input type="number" name="mouse_rusak" min="0" required></td>
+                            <td><input type="number" name="mouse_total" min="0" required></td>
+                            <td><input type="text" name="mouse_keterangan"></td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>KELENGKAPAN KABEL SET</td>
+                            <td><input type="number" name="kabel_baik" min="0" required></td>
+                            <td><input type="number" name="kabel_rusak" min="0" required></td>
+                            <td><input type="number" name="kabel_total" min="0" required></td>
+                            <td><input type="text" name="kabel_keterangan"></td>
+                        </tr>
+                        <!-- Tambahkan baris sesuai kebutuhan -->
+                    </tbody>
+                </table>
+
+                <!-- Tombol Submit -->
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Tambahkan script jQuery untuk handle submit form -->
+    <script>
+    $(document).ready(function() {
+        $('#checklist-form').on('submit', function(e) {
+            e.preventDefault(); // Mencegah form dikirim secara tradisional
+
+            // Kirim data menggunakan AJAX
+            $.ajax({
+                url: 'save_checklist_lab.php',
+                type: 'POST',
+                data: $(this).serialize(), // Mengambil semua data form
+                success: function(response) {
+                    // Tampilkan SweetAlert berdasarkan hasil
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil!',
+                        text: 'Data checklist lab berhasil disimpan.',
+                        showConfirmButton: true
+                    });
+                },
+                error: function(xhr, status, error) {
+                    // Jika ada kesalahan, tampilkan SweetAlert error
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Terjadi kesalahan saat menyimpan data.',
+                        showConfirmButton: true
+                    });
+                }
+            });
+        });
+    });
+    </script>
+</body>
+</html>
